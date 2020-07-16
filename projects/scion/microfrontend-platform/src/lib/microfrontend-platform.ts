@@ -48,6 +48,7 @@ import { ɵManifestRegistry } from './host/manifest-registry/ɵmanifest-registry
 import { PlatformManifestService } from './client/manifest-registry/platform-manifest-service';
 import { ApplicationActivator } from './host/activator/application-activator';
 import { RUNLEVEL_0, RUNLEVEL_1, RUNLEVEL_2 } from './microfrontend-platform-runlevels';
+import { ActivationFeedback } from './host/activator/activation-feedback';
 
 window.addEventListener('beforeunload', () => MicrofrontendPlatform.destroy(), {once: true});
 
@@ -165,6 +166,7 @@ export class MicrofrontendPlatform {
           Beans.register(PreferredSizeService);
           Beans.register(ManifestService);
           Beans.register(KeyboardEventDispatcher, {eager: true});
+          Beans.register(ActivationFeedback, {eager: true});
         }
         else {
           Beans.registerIfAbsent(MessageClient, {useExisting: PlatformMessageClient});

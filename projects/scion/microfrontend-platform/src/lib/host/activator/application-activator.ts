@@ -10,7 +10,7 @@
 import { Beans, Initializer } from '../../bean-manager';
 import { Activator, PlatformCapabilityTypes } from '../../platform.model';
 import { PlatformManifestService } from '../../client/manifest-registry/platform-manifest-service';
-import { filter, mergeMapTo, take } from 'rxjs/operators';
+import { filter, mergeMapTo, take, tap } from 'rxjs/operators';
 import { ApplicationRegistry } from '../application-registry';
 import { OutletRouter } from '../../client/router-outlet/outlet-router';
 import { SciRouterOutletElement } from '../../client/router-outlet/router-outlet.element';
@@ -21,6 +21,7 @@ import { PlatformMessageClient } from '../platform-message-client';
 import { MessageHeaders } from '../../messaging.model';
 import { PlatformState, PlatformStates } from '../../platform-state';
 import { EMPTY } from 'rxjs';
+import { ActivationFeedback } from './activation-feedback';
 
 /**
  * Activates micro applications which provide an activator capability.
@@ -33,8 +34,10 @@ import { EMPTY } from 'rxjs';
 export class ApplicationActivator implements Initializer {
 
   public async init(): Promise<void> {
+
+
     // Lookup activators.
-    const activators: Activator[] = await Beans.get(PlatformManifestService).lookupCapabilities$<Activator>({type: PlatformCapabilityTypes.Activator})
+    const activators: Activator[] = await Beans.get(PlatformManifestService).lookupCapabilities$<Activator>({ type: PlatformCapabilityTypes.Activator })
       .pipe(take(1))
       .toPromise();
 
@@ -43,10 +46,17 @@ export class ApplicationActivator implements Initializer {
       .filter(this.skipInvalidActivators())
       .reduce((grouped, activator) => Maps.addListValue(grouped, activator.metadata.appSymbolicName, activator), new Map<string, Activator[]>());
 
+    const activationFeedback = Beans.opt(ActivationFeedback);
+    if (activationFeedback) {
+      for (const app of activatorsGroupedByApp.keys()) {
+        activationFeedback.status(app);
+      }
+    }
+
     // Create Promises that wait for activators to signal ready.
     const activatorReadyPromises: Promise<void>[] = Array
       .from(activatorsGroupedByApp.entries())
-      .reduce((acc, [appSymbolicName, appActivators]) => acc.concat(this.waitForActivatorsToSignalReady(appSymbolicName, appActivators)), [] as Promise<void>[]);
+      .reduce((acc, [appSymbolicName, appActivators]) => acc.concat(this.waitForActivatorsToSignalReady(appSymbolicName, appActivators).then(() => activationFeedback ? activationFeedback.status(appSymbolicName, true) : null)), [] as Promise<void>[]);
 
     // Mount activators in hidden iframes
     activatorsGroupedByApp.forEach((sameAppActivators: Activator[]) => {
@@ -80,6 +90,7 @@ export class ApplicationActivator implements Initializer {
         .pipe(
           filter(msg => msg.headers.get(MessageHeaders.AppSymbolicName) === appSymbolicName),
           take(1),
+          tap(msg => console.log('>>> on msg', msg)),
           mergeMapTo(EMPTY),
         )
         .toPromise(),
@@ -103,10 +114,10 @@ export class ApplicationActivator implements Initializer {
     // Create the router outlet and navigate to the activator endpoint.
     const routerOutlet = document.createElement('sci-router-outlet') as SciRouterOutletElement;
     routerOutlet.name = UUID.randomUUID();
-    Beans.get(OutletRouter).navigate(activatorUrl, {outlet: routerOutlet.name}).then();
+    Beans.get(OutletRouter).navigate(activatorUrl, { outlet: routerOutlet.name }).then();
 
     // Provide the activation context
-    routerOutlet.setContextValue<ActivationContext>(ACTIVATION_CONTEXT, {primary, activator});
+    routerOutlet.setContextValue<ActivationContext>(ACTIVATION_CONTEXT, { primary, activator });
     // Add CSS classes for debugging purposes
     routerOutlet.classList.add('sci-activator', application.symbolicName);
     // Make the router outlet invisible

@@ -12,6 +12,11 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { ActivationFeedbackElement } from '@scion/microfrontend-platform';
+
+if (window === window.top) {
+  customElements.define('activation-feedback', ActivationFeedbackElement);
+}
 
 if (environment.production) {
   enableProdMode();

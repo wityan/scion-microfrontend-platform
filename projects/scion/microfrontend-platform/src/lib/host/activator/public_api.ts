@@ -12,3 +12,5 @@
  * Entry point for all public APIs of this package.
  */
 export { ACTIVATION_CONTEXT, ActivationContext } from './application-activator';
+export { ActivationFeedback } from './activation-feedback';
+export { ActivationFeedbackElement } from './activation-feedback-element';
