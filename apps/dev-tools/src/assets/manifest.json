@@ -1,0 +1,39 @@
+{
+  "name": "Devtools",
+  "baseUrl": "#",
+  "capabilities": [
+    {
+      "type": "devtools",
+      "qualifier": {
+        "command": "*"
+      },
+      "private": false
+    },
+    {
+      "type": "other",
+      "qualifier": {
+        "command": "*"
+      },
+      "private": false
+    },
+    {
+      "type": "empty"
+    }
+  ],
+  "intentions": [
+    {
+      "type": "country",
+      "qualifier": {
+        "name": "*",
+        "abbreviation": "*"
+      }
+    },
+    {
+      "type": "beer",
+      "qualifier": {
+        "name": "*",
+        "abbreviation": "*"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+@use 'sci-toolkit-styles' as sci-toolkit-styles;
+
+:host {
+  display: flex;
+  flex: auto;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+
+    > output {
+      padding: 1em;
+      display: flex;
+      flex: auto;
+
+      > sci-accordion {
+        flex: auto;
+        min-height: 10em;
+      }
+    }
+  }
+}

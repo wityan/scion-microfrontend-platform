@@ -18,6 +18,9 @@
     },
     {
       "path": "./apps/microfrontend-platform-testing-app/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/dev-tools/tsconfig.app.json"
     }
   ]
 }

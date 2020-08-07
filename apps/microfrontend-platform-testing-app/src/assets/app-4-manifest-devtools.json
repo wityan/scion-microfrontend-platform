@@ -1,0 +1,60 @@
+{
+  "name": "Testing App 4",
+  "baseUrl": "#",
+  "capabilities": [
+    {
+      "type": "beer",
+      "qualifier": {
+        "ibu": "?",
+        "name": "?",
+        "country": "?"
+      },
+      "private": false
+    },
+    {
+      "type": "company",
+      "qualifier": {
+        "name": "*",
+        "countries": "?"
+      },
+      "private": false
+    },
+    {
+      "description": "We have everything you need!",
+      "type": "product",
+      "qualifier": {
+        "id": "?",
+        "name": "*",
+        "type": "*"
+      },
+      "private": false
+    }
+   ],
+  "intentions": [
+    {
+      "type": "country",
+      "qualifier": {
+        "name": "*",
+        "abbreviation": "*"
+      }
+    },
+    {
+      "type": "beer",
+      "qualifier": {
+        "ibu": "*"
+      }
+    },
+    {
+      "type": "beer",
+      "qualifier": {
+        "name": "*"
+      }
+    },
+    {
+      "type": "beer",
+      "qualifier": {
+        "country": "*"
+      }
+    }
+  ]
+}

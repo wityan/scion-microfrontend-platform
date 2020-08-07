@@ -67,8 +67,19 @@ export class PlatformInitializer implements OnDestroy {
       };
     });
 
-    // Run the microfrontend platform as host app
+    // Load the devtools if defined in the environment
+    const devtools = environment['devtools'];
+    if (devtools) {
+      apps.push({
+        manifestUrl: `${devtools.url}/assets/manifest.json`,
+        symbolicName: devtools.symbolicName,
+        intentionRegisterApiDisabled: devtools.intentionRegisterApiDisabled,
+        intentionCheckDisabled: devtools.intentionCheckDisabled || false,
+        scopeCheckDisabled: devtools.scopeCheckDisabled || false
+      });
+    }
 
+    // Run the microfrontend platform as host app
     await MicrofrontendPlatform.startHost({
       apps: apps,
       properties: Array.from(this._queryParams.keys()).reduce((dictionary, key) => ({...dictionary, [key]: this._queryParams.get(key)}), {}),

@@ -1,0 +1,40 @@
+{
+  "name": "Testing App 3",
+  "baseUrl": "#",
+  "capabilities": [
+    {
+      "type": "beer",
+      "qualifier": {
+        "ibu": "?",
+        "name": "?",
+        "country": "?"
+      },
+      "private": false
+    },
+    {
+      "type": "language",
+      "qualifier": {
+        "name": "*",
+        "country": "?"
+      },
+      "private": false
+    },
+    {
+      "description": "Looking for a programmin language?",
+      "type": "programming-language",
+      "qualifier": {
+        "name": "*"
+      },
+      "private": false
+    }
+   ],
+  "intentions": [
+    {
+      "type": "country",
+      "qualifier": {
+        "name": "*",
+        "abbreviation": "*"
+      }
+    }
+  ]
+}

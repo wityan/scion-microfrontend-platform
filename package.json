@@ -35,7 +35,8 @@
     "microfrontend-platform:adoc:copy:images": "cp -r ./docs/adoc/microfrontend-platform-developer-guide/images dist/microfrontend-platform-developer-guide",
     "microfrontend-platform:adoc:copy:favicon": "cp ./resources/branding/favicon.ico dist/microfrontend-platform-developer-guide",
 
-    "microfrontend-platform-testing-app:ngserve": "run-p microfrontend-platform-testing-app:ngserve:*",
+    "microfrontend-platform-testing-app:with-dev-tools:ngserve": "run-p -r \"microfrontend-platform-testing-app:ngserve -- --configuration=production-localhost-devtools\" dev-tools:ngserve",
+    "microfrontend-platform-testing-app:ngserve": "run-p \"microfrontend-platform-testing-app:ngserve:* -- {@}\" --",
     "microfrontend-platform-testing-app:ngserve:4201": "ng serve microfrontend-platform-testing-app --port 4201",
     "microfrontend-platform-testing-app:ngserve:4202": "ng serve microfrontend-platform-testing-app --port 4202",
     "microfrontend-platform-testing-app:ngserve:4203": "ng serve microfrontend-platform-testing-app --port 4203",
@@ -56,6 +57,11 @@
     "microfrontend-platform-testing-app-vercel:build": "ng build microfrontend-platform-testing-app --configuration=production-vercel",
     "microfrontend-platform-testing-app-localhost:build": "ng build microfrontend-platform-testing-app --configuration=production-localhost",
 
+    "dev-tools:ngserve": "ng serve dev-tools --port 5200",
+    "dev-tools:lint": "ng lint dev-tools",
+    "dev-tools-vercel:build": "ng build dev-tools --configuration=production-vercel",
+    "dev-tools-localhost:build": "ng build dev-tools --configuration=production-localhost",
+
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && markdown-include docs/site/changelog/changelog.template.json"
   },
   "private": true,
@@ -69,8 +75,8 @@
     "@angular/platform-browser": "10.0.4",
     "@angular/platform-browser-dynamic": "10.0.4",
     "@angular/router": "10.0.4",
-    "@scion/toolkit": "10.0.0-beta.1",
-    "@scion/toolkit.internal": "10.0.0-beta.1",
+    "@scion/toolkit": "10.0.0-beta.2",
+    "@scion/toolkit.internal": "10.0.0-beta.2",
     "js-sha256": "0.9.0",
     "rxjs": "6.5.5",
     "tslib": "2.0.0",

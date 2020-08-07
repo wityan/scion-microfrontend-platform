@@ -1,0 +1,27 @@
+<header>
+  <h4>{{title}}</h4>
+  <span *ngIf="logicalOperation === 'and'">AND'ed</span>
+  <span *ngIf="logicalOperation === 'or'">OR'ed</span>
+</header>
+<div class="filter">
+  <input #key type="text" [formControl]="keyFC" *ngIf="type==='key-value'">
+  <input #value type="text" [formControl]="valueFC" (keydown.enter)="onAddFilterClick()" >
+  <button class="add-filter material-icons" type="button" (click)="onAddFilterClick()">add</button>
+</div>
+<div class="chips">
+  <ng-container *ngIf="type==='value' && filters.length">
+    <div class="app-filters">
+      <span class="app" *ngFor="let app of filters" (click)="onRemoveFilter(app)">{{app}}</span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="type==='key-value' && filters.length">
+    <div class="qualifier-filters">
+      <span class="qualifier" *ngFor="let qualifier of filters" (click)="onRemoveFilter(qualifier)">
+        <ng-container *ngIf="qualifier.key; else emptyQualifier">
+            <span class="key">{{qualifier.key}}</span>&#32;:&#32;<span class="value">{{qualifier.value || 'null'}}</span>
+        </ng-container>
+        <ng-template #emptyQualifier>&#123;&#125;</ng-template>
+      </span>
+    </div>
+  </ng-container>
+</div>

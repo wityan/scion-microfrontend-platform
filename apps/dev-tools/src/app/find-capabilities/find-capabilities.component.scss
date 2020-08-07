@@ -1,0 +1,12 @@
+@use 'sci-toolkit-styles' as sci-toolkit-styles;
+
+:host {
+  display: flex;
+
+  > section {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 320px;
+    grid-row-gap: 20px;
+  }
+}

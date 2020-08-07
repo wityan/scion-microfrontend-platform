@@ -1,0 +1,102 @@
+@use 'sci-toolkit-styles' as sci-toolkit-styles;
+$menu-bar-size: 33px;
+
+:host {
+  > div {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    > sci-viewport.menu menu {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      background-color: var(--sci-color-P100);
+
+      > li {
+        list-style-type: none;
+        border: 1px solid var(--sci-color-P200);
+        border-radius: 4px;
+        margin: 3px;
+        width: 26px;
+        height: 26px;
+
+        > a {
+          color: var(--sci-color-P900);
+        }
+
+        &:hover {
+          background-color: var(--sci-color-P300);
+        }
+      }
+    }
+
+    > sci-viewport.main {
+      flex: auto;
+
+      router-outlet {
+        position: absolute; // take router outlet out of the document flow
+      }
+
+      sci-sashbox {
+        --sci-sashbox-gap: 0;
+
+        div {
+          display: flex;
+          flex-direction: column;
+
+          header {
+            display: flex;
+            background-color: var(--sci-color-P100);
+
+            > span {
+              font-weight: bold;
+              white-space: nowrap;
+              color: var(--sci-color-P900);
+
+              &.title {
+                flex: auto;
+                padding: .5em;
+              }
+
+              &.icon {
+                flex: none;
+                cursor: pointer;
+                padding: .2em;
+                font-size: 1.5em;
+                color: var(--sci-color-P500);
+
+                &:hover {
+                  color: var(--sci-color-P900);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.top {
+      flex-direction: column;
+
+      > sci-viewport.menu {
+        height: $menu-bar-size;
+        border-bottom: 1px solid var(--sci-color-P200);
+      }
+    }
+
+    &.left {
+      > sci-viewport.menu {
+        width: $menu-bar-size;
+        border-right: 1px solid var(--sci-color-P200);
+
+        menu {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}

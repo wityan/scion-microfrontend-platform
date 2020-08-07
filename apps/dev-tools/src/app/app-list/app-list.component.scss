@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex: auto;
+
+  section {
+    flex: auto;
+    display: flex;
+
+    > sci-list {
+      padding: 1em;
+      flex: auto;
+
+      a:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

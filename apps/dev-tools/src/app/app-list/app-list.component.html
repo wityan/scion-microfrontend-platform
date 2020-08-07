@@ -1,0 +1,8 @@
+<section>
+  <sci-list (filter)="onAppFilter($event)" filterPosition="top">
+    <ng-template *ngFor="let app of applications$ | async; trackBy: trackByFn" sciListItem [key]="app.symbolicName">
+      <devtools-app-list-item [app]="app"></devtools-app-list-item>
+    </ng-template>
+  </sci-list>
+</section>
+

@@ -1,0 +1,8 @@
+<a class="app-name" [routerLink]="[{outlets: {details: ['app-detail', app.symbolicName]}}]">{{app.name}}</a>
+<span class="app-symbolic-name" title="symbolic name">{{app.symbolicName}}</span>
+<a class="url" [href]="app.baseUrl" target="_blank">{{app.baseUrl}}</a>
+
+<div class="chips">
+  <span class="chip" *ngIf="capabilityCount$ | async as capabilityCount">{{capabilityCount}} {{capabilityCount === 1 ? 'capability' : 'capabilities'}}</span>
+  <span class="chip" *ngIf="intentionCount$ | async as intentionCount">{{intentionCount}} {{intentionCount === 1 ? 'intention' : 'intentions'}}</span>
+</div>

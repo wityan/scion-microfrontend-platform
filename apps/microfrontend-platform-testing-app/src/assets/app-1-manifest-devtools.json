@@ -1,0 +1,59 @@
+{
+  "name": "Testing App 1",
+  "baseUrl": "#",
+  "capabilities": [
+    {
+      "description": "Provides information about beer.",
+      "type": "beer",
+      "qualifier": {
+        "ibu": "?",
+        "name": "?",
+        "country": "?"
+      },
+      "properties": {
+        "test": "test"
+      },
+      "private": false
+    },
+    {
+      "type": "person",
+      "qualifier": {
+        "name": "*",
+        "email": "?",
+        "country": "*",
+        "company": "*"
+      },
+      "private": false
+    },
+    {
+      "type": "user",
+      "qualifier": {
+        "id": "*",
+        "name": "*",
+        "email": "*"
+      },
+      "private": false
+    }
+  ],
+  "intentions": [
+    {
+      "type": "country",
+      "qualifier": {
+        "languages": "*"
+      }
+    },
+    {
+      "type": "language",
+      "qualifier": {
+        "name": "*",
+        "country": "?"
+      }
+    },
+    {
+      "type": "programming-language",
+      "qualifier": {
+        "name": "*"
+      }
+    }
+  ]
+}

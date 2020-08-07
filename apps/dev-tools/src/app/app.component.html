@@ -1,0 +1,35 @@
+<div [className]="menuBarPosition" sciDimension (sciDimensionChange)="onDimensionChange($event)">
+  <sci-viewport class="menu">
+    <menu role="toolbar">
+      <li>
+        <a [routerLink]="['app-list']" title="List"><i class="material-icons list">list</i></a>
+      </li>
+      <li>
+        <a [routerLink]="['find-capabilities', {outlets: {details: ['filter-results']}}]" title="Filter"><i class="material-icons search">search</i></a>
+      </li>
+    </menu>
+  </sci-viewport>
+  <sci-viewport class="main">
+    <sci-sashbox>
+      <ng-template sciSash *ngIf="showPrimaryOutlet" size="1">
+        <div>
+          <header>
+            <span class="title">{{primaryTitle}}</span>
+            <span class="icon hide-primary material-icons keyboard_arrow_left" *ngIf="showPrimaryOutlet && showDetailsOutlet" (click)="onTogglePrimaryClicked()">keyboard_arrow_left</span>
+          </header>
+          <router-outlet (activate)="onPrimaryOutletActivated($event)"></router-outlet>
+        </div>
+      </ng-template>
+
+      <ng-template sciSash *ngIf="showDetailsOutlet" size="2">
+        <div>
+          <header>
+            <span class="icon material-icons keyboard_arrow_right" *ngIf="!showPrimaryOutlet && showDetailsOutlet" (click)="onTogglePrimaryClicked()">keyboard_arrow_right</span>
+            <span class="title">{{detailsTitle}}</span>
+          </header>
+          <router-outlet name="details" (activate)="onDetailsOutletActivated($event)"></router-outlet>
+        </div>
+      </ng-template>
+    </sci-sashbox>
+  </sci-viewport>
+</div>

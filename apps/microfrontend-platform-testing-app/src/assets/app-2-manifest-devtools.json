@@ -1,0 +1,34 @@
+{
+  "name": "Testing App 2",
+  "baseUrl": "#",
+  "capabilities": [
+    {
+      "type": "beer",
+      "qualifier": {
+        "ibu": "?",
+        "name": "?",
+        "country": "?"
+      },
+      "private": false
+    },
+    {
+      "description": "Provides country information.",
+      "type": "country",
+      "qualifier": {
+        "name": "?",
+        "abbreviation": "?",
+        "languages": "*"
+      },
+      "private": false
+    }
+   ],
+  "intentions": [
+    {
+      "type": "language",
+      "qualifier": {
+        "name": "*",
+        "country": "?"
+      }
+    }
+  ]
+}

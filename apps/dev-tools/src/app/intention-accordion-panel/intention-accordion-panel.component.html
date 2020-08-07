@@ -1,0 +1,12 @@
+<section>
+  <h2>Handled by following applications</h2>
+  <ul>
+    <li *ngFor="let application of applications$ | async">
+      <a class="app-name"
+         [routerLink]="['../', application.symbolicName]"
+         [class.self]="application.symbolicName === intention.metadata.appSymbolicName">
+        {{application.name}}
+      </a>
+    </li>
+  </ul>
+</section>

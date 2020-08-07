@@ -1,0 +1,138 @@
+@use 'sci-toolkit-styles' as sci-toolkit-styles;
+
+:host {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+
+  > section {
+    padding: 1em;
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+
+    > section.properties {
+      flex: 0 0 auto;
+      display: grid;
+      grid-template-columns: minmax(50px, 60px) auto;
+      grid-column-gap: 1em;
+      grid-row-gap: .5em;
+      grid-auto-rows: min-content;
+      margin-bottom: 1em;
+
+      > label {
+        grid-column: 1/2;
+      }
+
+      > span, a {
+        grid-column: 2/3;
+      }
+    }
+
+    > sci-tabbar {
+      flex: auto;
+
+      section {
+        > h2 {
+          margin-top: 0;
+          font-size: 1.25em;
+          position: relative; // positioning anchor for the badge
+          align-self: flex-start;
+          color: var(--sci-color-P800);
+        }
+      }
+
+      section.capabilities, section.intentions {
+        flex: auto;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        > h2 > span.count-badge {
+          $size: 12px;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          right: -1.5em;
+          top: 0;
+          border-radius: $size/2;
+          color: #FFFFFF;
+          font-size: 10px;
+          font-weight: normal;
+          min-height: $size;
+          min-width: $size;
+          background-color: var(--sci-color-P400);
+          user-select: none;
+        }
+
+        > sci-filter-field {
+          margin-bottom: .2em;
+        }
+
+        > sci-accordion {
+          flex: auto;
+        }
+      }
+
+      section.dependencies {
+        flex: auto;
+        display: flex;
+
+        > div {
+          flex: auto;
+          display: flex;
+          margin-top: 1em;
+          border: 1px solid var(--sci-color-P500);
+          position: relative;
+
+          > span {
+            position: absolute;
+            font-size: .75em;
+            top: -.5em;
+            left: 1em;
+            background-color: white;
+          }
+
+          > sci-list {
+            flex: auto;
+            padding: 1em;
+          }
+
+          &.requires {
+            margin-right: .5em;
+          }
+
+          &.required-by {
+            margin-left: .5em;
+          }
+        }
+      }
+
+      section.platform-flags {
+        flex: auto;
+
+        > div {
+          display: grid;
+          grid-template-columns: auto min-content;
+          margin-bottom: 1rem;
+
+          > h4 {
+            grid-column: 1 / 2;
+            margin: 0;
+            color: var(--sci-color-P900)
+          }
+
+          > span {
+            grid-column: 2 / 3;
+            font-weight: bold;
+            @include sci-toolkit-styles.chip(var(--sci-color-P900), var(--sci-color-P100), var(--sci-color-P700));
+            margin: 0;
+            min-width: 100px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

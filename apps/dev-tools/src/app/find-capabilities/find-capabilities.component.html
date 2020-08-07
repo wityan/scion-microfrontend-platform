@@ -1,0 +1,12 @@
+<section>
+  <devtools-filter-field [title]="'Filter by Type'" type="value" logicalOperation="or"
+                         (filterAdded)="onTypeFilterAdded($event)" (filterRemoved)="onTypeFilterRemoved($event)">
+  </devtools-filter-field>
+  <devtools-filter-field [title]="'Filter by Qualifier'" type="key-value" logicalOperation="or"
+                         (filterAdded)="onQualifierFilterAdded($event)" (filterRemoved)="onQualifierFilterRemoved($event)">
+  </devtools-filter-field>
+  <devtools-filter-field [title]="'Filter by App'" type="value" logicalOperation="or"
+                         (filterAdded)="onAppFilterAdded($event)" (filterRemoved)="onAppFilterRemoved($event)">
+  </devtools-filter-field>
+</section>
+

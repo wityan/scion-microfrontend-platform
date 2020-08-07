@@ -8,33 +8,40 @@
  *  SPDX-License-Identifier: EPL-2.0
  */
 
-import { version } from 'package.json';
-
 export const environment = {
   production: true,
   apps: {
     app_1: {
       symbolicName: 'app-1',
-      url: `https://scion-microfrontend-platform-testing-app1-v${version.replace(/\./g, '-')}.now.sh`,
+      url: 'http://localhost:4201',
     },
     app_2: {
       symbolicName: 'app-2',
-      url: `https://scion-microfrontend-platform-testing-app2-v${version.replace(/\./g, '-')}.now.sh`,
+      url: 'http://localhost:4202',
     },
     app_3: {
       symbolicName: 'app-3',
-      url: `https://scion-microfrontend-platform-testing-app3-v${version.replace(/\./g, '-')}.now.sh`,
+      url: 'http://localhost:4203',
     },
     app_4: {
       symbolicName: 'app-4',
-      url: `https://scion-microfrontend-platform-testing-app4-v${version.replace(/\./g, '-')}.now.sh`,
+      url: 'http://localhost:4204',
     },
   },
   devtools: {
     symbolicName: 'dev-tools',
-    url: 'https://scion-dev-tools.now.sh',
+    url: 'http://localhost:5200',
     intentionCheckDisabled: true,
     scopeCheckDisabled: true,
     intentionRegisterApiDisabled: false,
   },
 };
+
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

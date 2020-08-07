@@ -1,0 +1,119 @@
+@use 'sci-toolkit-styles' as sci-toolkit-styles;
+
+:host {
+
+  header {
+    display: flex;
+    border: 1px solid var(--sci-color-P500);
+    padding: .5em .5em 2em;
+    background-color: var(--sci-color-P50);
+
+    > h4 {
+      flex: auto;
+      margin-top: 0;
+    }
+
+    > span {
+      font-style: italic;
+      font-size: smaller;
+    }
+  }
+
+  > div.filter {
+    display: flex;
+    min-height: 50px;
+    margin: -25px 50px;
+    border: 1px solid var(--sci-color-P500);
+    padding: .5em;
+    background-color: white;
+    align-items: center;
+
+    > input {
+      width: 75px;
+      margin-right: 15px;
+      @include sci-toolkit-styles.input-field();
+    }
+
+    > button.add-filter {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  > div.chips {
+    border-left: 1px solid var(--sci-color-P500);
+    border-right: 1px solid var(--sci-color-P500);
+    border-bottom: 1px solid var(--sci-color-P500);
+    padding: 2.5em .5em .5em;
+    min-height: 50px;
+
+    > div {
+      display: flex;
+      flex-wrap: wrap;
+
+      > span {
+        border-radius: 10px;
+        padding: 5px 10px;
+        margin: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.app {
+          border: 1px solid var(--sci-color-P500);
+          background-color: var(--sci-color-P500);
+          color: var(--sci-color-P900);
+        }
+
+        &.type {
+          border: 1px solid var(--sci-color-P500);
+          background-color: var(--sci-color-P100);
+          color: var(--sci-color-P900);
+        }
+
+        &.qualifier {
+          border: 1px solid var(--sci-color-P500);
+          background-color: transparent;
+          color: var(--sci-color-P900);
+
+          > span.key {
+            font-weight: bold;
+
+            &:not(:first-child) {
+              margin-left: 5px;
+            }
+          }
+
+          > span.value {
+            &:not(:last-child) {
+              &::after {
+                content: ',';
+              }
+            }
+          }
+        }
+
+        &:hover {
+          position: relative;
+          cursor: pointer;
+          border: 1px solid rgba(139, 0, 0);
+          background-color: rgba(139, 0, 0, .5);
+          color: var(--sci-color-P500);
+
+          &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            content: 'x';
+            border-radius: 10px;
+            color: rgb(41, 44, 49);
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
